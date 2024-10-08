@@ -19,20 +19,20 @@ public class ProdutoTest {
 	
 	@BeforeEach
 	public void inicializa() {
-		livro = new Produto("Introdução ao Teste de Software", 100.00);
+		livro = new Produto("Introduï¿½ï¿½o ao Teste de Software", 100.00);
 	}
 	
 	@Test
 	public void testCriaProduto() {
 		Assertions.assertAll("livro",
-				() -> assertEquals("Introdução ao Teste de Software", livro.getNome()),
+				() -> assertEquals("Introduï¿½ï¿½o ao Teste de Software", livro.getNome()),
 				() -> assertTrue(100.00 == livro.getPreco())						
 				);
 	}
 	
 	@Test
 	public void testProdutosIguais() {
-		Produto livro2 = new Produto("Introdução ao Teste de Software", 90.00);
+		Produto livro2 = new Produto("Introduï¿½ï¿½o ao Teste de Software", 90.00);
 		
 		assertNotSame(livro, livro2);
 		
@@ -44,6 +44,31 @@ public class ProdutoTest {
 		assertThat(livro.getNome(), notNullValue());
 		assertThat(livro.getNome(), containsString("Teste"));
 		assertThat(livro, instanceOf(Produto.class));
+	}
+	
+	@Test
+	public void testProdutoIgual() {
+		livro = new Produto("ProgramaÃ§Ã£o 1", 100.00);
+		boolean resultado = livro.equals(livro);
+		
+		Assertions.assertEquals(true, resultado);				
+		
+	}
+	
+	@Test
+	public void testProdutoDiferente() {
+	    Produto livroP1 = new Produto("ProgramaÃ§Ã£o 1", 100.00);
+	    Produto livroP2 = new Produto("ProgramaÃ§Ã£o 2", 200.00);
+	    boolean resultado = livroP1.equals(livroP2);
+	    
+	    Assertions.assertEquals(false, resultado, "Produtos com nomes diferentes devem ser considerados diferentes.");
+	}
+
+	
+	@Test
+	public void testAlteraPreco() {
+	    livro.setPreco(120.00);
+	    assertEquals(120.00, livro.getPreco());
 	}
 
 }
